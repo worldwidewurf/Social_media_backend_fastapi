@@ -5,13 +5,21 @@ from . import models
 from .database import engine
 from .config import settings
 app = FastAPI()
-origins = ["*"]
+origins = ["*"]  # List of allowed origins for CORS
+
+"""Adding CORS middleware to allow cross-origin requests"""
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],)
+
+"""
+Including the defined routers in the application
+"""
+
 app.include_router(user.router)
 app.include_router(post.router)
 app.include_router(auth.router)

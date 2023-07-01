@@ -14,6 +14,19 @@ router = APIRouter(
     
 @router.post("/",status_code=status.HTTP_201_CREATED, response_model=schemas.UserResponse)
 def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
+    """_summary_ : This function creates a new user.
+
+    Args:
+        user (schemas.UserCreate): user to be created.
+        db (Session, optional): _description_. Defaults to Depends(get_db).
+
+    Raises:
+        HTTPException: _description_
+        HTTPException: _description_
+
+    Returns:
+        _type_: schemas.UserResponse
+    """
     try:
         hashed_password = utils.hash_password(user.password)
         user.password = hashed_password
